@@ -60,35 +60,53 @@ fetch('https://js-dynamic-portfolio-data-makerslab-emlyon-cdweb-8f83155c64a0cc.g
         // lui mettre du contenu (data.texteAppelAction) button.textContent
         button.textContent = data.texteAppelAction;
         console.log(button);
-        // mettre le button dans la div
+        // mettre le button dans la div (div.append())
         div.append(button);
 
-
+        // 🔴 Niveau 3 – Afficher les activités
+        // Pour chaque activité dans les données JSON, crée dynamiquement une div contenant un titre, une description et une image.
+        // Affiche ces informations dans une section dédiée, avec une carte pour chaque activité si les données contiennent un lien vers une image.
         let ContainerProduit = document.getElementById("ContainerProduit");
         let produits = data.produits;
 
-        produits.forEach(element => {
-            let card = document.createElement(div);
-            let titre = document.createElement(h3);
-            let para = document.createElement(p);
-            let image = document.createElement(img);
-                //injecter les données dans les éléments 
-                InjectJsScript
+        produits.forEach(donneeDansProduits => {
+            let card = document.createElement("div");
+            let titre = document.createElement("h3");
+            let para = document.createElement("p");
+            let image = document.createElement("img");
+
+            //injecter les données dans les éléments 
+
+            titre.textContent = donneeDansProduits.nom;
+            para.textContent = donneeDansProduits.description;
+            image.src = donneeDansProduits["image-url"];
+            ContainerProduit.appendChild(card);
+            card.appendChild(image);
+            card.appendChild(titre);
+            card.appendChild(para);
+
+           
+            });
 
 
 
 
 
-
-        });
-
+        })
 
 
-    })
-    .catch(error => {
-        // ici on gère les erreurs
-        console.error('Erreur lors du fetch :', error);
-    });
+
+
+
+    
+
+
+
+
+ .catch(error => {
+     // ici on gère les erreurs
+     console.error('Erreur lors du fetch :', error);
+ });
 
 
 
